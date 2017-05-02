@@ -13,7 +13,6 @@ License: LGPL-3
 Title: Zip Sorted Arrays Together
 BugReports: https://github.com/shabbychef/PKG_NAME()/issues
 Description: Just zips together sorted arrays.
-License: LGPL-3
 Imports:
     Rcpp (>= 0.12.3)
 LinkingTo: Rcpp

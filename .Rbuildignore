@@ -14,8 +14,8 @@ man-roxygen
 ^\.docker_img$
 ^nodist$
 ^rebuildTags.sh
-^fromo.*.tar.gz$
-^fromo.Rcheck$
+^zipper.*.tar.gz$
+^zipper.Rcheck$
 ^github_extra
 unit_test.log
 LICENSE
