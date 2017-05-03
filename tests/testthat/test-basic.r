@@ -58,12 +58,32 @@ test_that("basic usage",{#FOLDUP
 	y <- sort(rnorm(100))
 	test_em(x,y)
 
+	x <- sort(rnorm(1))
+	y <- sort(rnorm(100))
+	test_em(x,y)
+
+	x <- sort(rnorm(100))
+	y <- sort(rnorm(1))
+	test_em(x,y)
+
 	x <- sort(ceiling(rnorm(100)))
 	y <- sort(rnorm(100))
 	test_em(x,y)
 
 	x <- sort(ceiling(rnorm(100)))
 	y <- sort(ceiling(rnorm(100)))
+	test_em(x,y)
+
+	x <- sort(as.integer(ceiling(rnorm(100))))
+	y <- sort(as.integer(ceiling(rnorm(100))))
+	test_em(x,y)
+
+	x <- sort(as.integer(ceiling(rnorm(1))))
+	y <- sort(as.integer(ceiling(rnorm(100))))
+	test_em(x,y)
+
+	x <- sort(as.integer(ceiling(rnorm(100))))
+	y <- sort(as.integer(ceiling(rnorm(1))))
 	test_em(x,y)
 
 	# sentinel
