@@ -21,8 +21,6 @@
 #' \describe{
 #' \item{zip_le}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} less than or equal to \eqn{y_i}.}
 #' \item{zip_lt}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} less than \eqn{y_i}.}
-#' \item{zip_ge}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} greater than or equal to \eqn{y_i}.}
-#' \item{zip_gt}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} greater than \eqn{y_i}.}
 #' }
 #'
 #' @note
@@ -33,7 +31,7 @@
 #' x <- sort(rnorm(1e5))
 #' y <- sort(rnorm(1e2))
 #' idx1 <- zip_le(x,y)
-#' # slow way:
+#' # slow way, should give the same answer
 #' uther <- rep(NA,length(y))
 #' for (iii in 1:length(y)) {
 #'   uther[iii] <- sum(x <= y[iii])
@@ -41,6 +39,7 @@
 #'
 #' @note it would be better if this code supported mixed types of sortx and looky.
 #' @template etc
+#' @name zipsorted
 #' @rdname zipsorted
 #' @export
 zip_le <- function(sortx, looky) {

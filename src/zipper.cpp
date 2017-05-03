@@ -65,7 +65,7 @@ int bin_search_lstar(T sortx, D val, const int lo, const int hi) {
 			}
 		}
 	}
-	return ilo - 1;
+	return ilo;
 }
 
 // for each val in y, 
@@ -93,7 +93,7 @@ IntegerVector zip_index_lstar(T sortx, T refy, const int lo, const int hi) {
 				if (sortx[xidx] <= refy[yidx]) {
 					xidx++;
 				} else {
-					retv[yidx] = xidx - 1;
+					retv[yidx] = xidx;
 					yidx++;
 				}
 			}
@@ -104,13 +104,13 @@ IntegerVector zip_index_lstar(T sortx, T refy, const int lo, const int hi) {
 				if (sortx[xidx] < refy[yidx]) {
 					xidx++;
 				} else {
-					retv[yidx] = xidx - 1;
+					retv[yidx] = xidx;
 					yidx++;
 				}
 			}
 
 		} 
-		lastv = xidx - 1;
+		lastv = xidx;
 		while (yidx < ynel) {
 			retv[yidx] = lastv;
 			yidx++;
@@ -148,8 +148,6 @@ IntegerVector zip_index_lstar_wrap(T sortx, T refy) {
 //' \describe{
 //' \item{zip_le}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} less than or equal to \eqn{y_i}.}
 //' \item{zip_lt}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} less than \eqn{y_i}.}
-//' \item{zip_ge}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} greater than or equal to \eqn{y_i}.}
-//' \item{zip_gt}{Returns the vector \eqn{L} such that there are exactly \eqn{L_i} elements of \eqn{x} greater than \eqn{y_i}.}
 //' }
 //'
 //' @note
@@ -160,7 +158,7 @@ IntegerVector zip_index_lstar_wrap(T sortx, T refy) {
 //' x <- sort(rnorm(1e5))
 //' y <- sort(rnorm(1e2))
 //' idx1 <- zip_le(x,y)
-//' # slow way:
+//' # slow way, should give the same answer
 //' uther <- rep(NA,length(y))
 //' for (iii in 1:length(y)) {
 //'   uther[iii] <- sum(x <= y[iii])
@@ -168,6 +166,7 @@ IntegerVector zip_index_lstar_wrap(T sortx, T refy) {
 //'
 //' @note it would be better if this code supported mixed types of sortx and looky.
 //' @template etc
+//' @name zipsorted
 //' @rdname zipsorted
 //' @export
 // [[Rcpp::export]]
