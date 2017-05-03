@@ -52,13 +52,13 @@ int bin_search_lstar(T sortx, D val, const int lo, const int hi) {
 		kidx = (ilo + ihi) / 2;
 
 		if (comp_with_eq) {
-			if (val <= sortx[kidx]) {
+			if (val < sortx[kidx]) {
 				ihi = kidx;
 			} else {
 				ilo = kidx + 1;
 			}
 		} else {
-			if (val < sortx[kidx]) {
+			if (val <= sortx[kidx]) {
 				ihi = kidx;
 			} else {
 				ilo = kidx + 1;
@@ -75,7 +75,10 @@ int bin_search_lstar(T sortx, D val, const int lo, const int hi) {
 // lo = 0 and hi = length(sortx) to do the
 // whole vector.
 template <typename T,typename D,bool comp_with_eq>
-IntegerVector zip_index_lstar(T sortx, T refy, const int lo, const int hi) {
+IntegerVector zip_index_lstar(T sortx, T refy) {
+    const int lo=0;
+    const int hi=int(sortx.length());
+
 	int kidx;
 	int xidx, yidx, lastv;
 	int ynel = refy.length();
@@ -117,15 +120,6 @@ IntegerVector zip_index_lstar(T sortx, T refy, const int lo, const int hi) {
 		}
 	}
 	return retv;
-}
-
-template <typename T,typename D,bool comp_with_eq>
-IntegerVector zip_index_lstar_wrap(T sortx, T refy) {
-    const int lo=0;
-    const int hi=int(sortx.length());
-    IntegerVector retv;
-    retv = zip_index_lstar<T,D,comp_with_eq>(sortx, refy, lo, hi);
-    return retv;
 }
 
 //' @title
@@ -173,8 +167,8 @@ IntegerVector zip_index_lstar_wrap(T sortx, T refy) {
 IntegerVector zip_le(SEXP sortx, SEXP looky) {
     IntegerVector retv;
     switch (TYPEOF(sortx)) {
-        case  INTSXP: { retv = zip_index_lstar_wrap<IntegerVector,int,TRUE>(sortx, looky); break; }
-        case REALSXP: { retv = zip_index_lstar_wrap<NumericVector,double,TRUE>(sortx, looky); break; }
+        case  INTSXP: { retv = zip_index_lstar<IntegerVector,int,TRUE>(sortx, looky); break; }
+        case REALSXP: { retv = zip_index_lstar<NumericVector,double,TRUE>(sortx, looky); break; }
         default: stop("Unsupported input type");
     }
 	return retv;
@@ -186,8 +180,8 @@ IntegerVector zip_le(SEXP sortx, SEXP looky) {
 IntegerVector zip_lt(SEXP sortx, SEXP looky) {
     IntegerVector retv;
     switch (TYPEOF(sortx)) {
-        case  INTSXP: { retv = zip_index_lstar_wrap<IntegerVector,int,FALSE>(sortx, looky); break; }
-        case REALSXP: { retv = zip_index_lstar_wrap<NumericVector,double,FALSE>(sortx, looky); break; }
+        case  INTSXP: { retv = zip_index_lstar<IntegerVector,int,FALSE>(sortx, looky); break; }
+        case REALSXP: { retv = zip_index_lstar<NumericVector,double,FALSE>(sortx, looky); break; }
         default: stop("Unsupported input type");
     }
 	return retv;
