@@ -98,5 +98,43 @@ test_that("basic usage integer integer",{#FOLDUP
 # 2FIX: check the effects of NA
 #UNFOLD
 
+context("form of input")#FOLDUP
+test_that("it runs",{#FOLDUP
+	set.char.seed("d29871dd-b9c0-40f3-ac61-36ea6ccc3447")
+
+	x <- sort(rnorm(100))
+	y <- sort(rnorm(100))
+	zip_le(x,y)
+	zip_lt(x,y)
+
+	# sentinel
+	expect_true(TRUE)
+})#UNFOLD
+test_that("wrong input",{#FOLDUP
+	set.char.seed("441fb01f-0413-400d-a86f-5eefc31c58b7")
+
+	x <- letters
+	y <- sort(rnorm(100))
+	expect_error(result <- zip_le(x,y))
+	expect_error(result <- zip_lt(x,y))
+
+	x <- sort
+	y <- sort(rnorm(100))
+	expect_error(result <- zip_le(x,y))
+	expect_error(result <- zip_lt(x,y))
+
+	# booleans? not yet.
+	x <- sort(rnorm(100)) > 0.3
+	y <- sort(rnorm(100)) > -1
+	expect_error(result <- zip_le(x,y))
+	expect_error(result <- zip_lt(x,y))
+
+	# sentinel
+	expect_true(TRUE)
+})#UNFOLD
+# 2FIX: check the effects of NA
+#UNFOLD
+
+
 #for vim modeline: (do not edit)
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=r:ft=r:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
