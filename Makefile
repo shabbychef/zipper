@@ -11,7 +11,7 @@ PKG_NAME 					:= zipper
 VMAJOR 						 = 0
 VMINOR 						 = 1
 VPATCH  					 = 0
-VDEV 							 = 
+VDEV 							 = .1000
 
 RPKG_USES_RCPP 		:= 1
 
